@@ -1,0 +1,67 @@
+{% extends "profile/editbase.html" %}
+
+{% block editprofile %}
+    <div  class="section header">
+        <p>Manage Notifications</p>
+    </div>
+  <div class="section">
+      <div class="grid-x division">
+        <div class="cell medium-10">
+            <p>Do wanna get Like Notifications?</p>
+        </div>
+        <div class="switch small cell medium-2">
+            <input class="switch-input" id="smallSwitch1" type="checkbox" name="exampleSwitch1" checked>
+            <label class="switch-paddle" for="smallSwitch1">
+              <span class="show-for-sr">Small Portions Only</span>
+            </label>
+        </div>
+      </div>
+      <div class="grid-x division">
+        <div class="cell medium-10">
+            <p>Do wanna get Comments Notifications?</p>
+        </div>
+        <div class="switch small cell medium-2">
+            <input class="switch-input" id="smallSwitch2" type="checkbox" name="exampleSwitch" checked>
+            <label class="switch-paddle" for="smallSwitch2">
+              <span class="show-for-sr">Small Portions Only</span>
+            </label>
+        </div>
+      </div>
+      <div class="grid-x division">
+        <div class="cell medium-10">
+            <p>Do wanna get Follow Notifications?</p>
+        </div>
+        <div class="switch small cell medium-2">
+            <input class="switch-input" id="smallSwitch3" type="checkbox" name="exampleSwitch" checked>
+            <label class="switch-paddle" for="smallSwitch3">
+              <span class="show-for-sr">Small Portions Only</span>
+            </label>
+        </div>
+      </div>
+      <div class="grid-x division">
+        <div class="cell medium-10">
+            <p>Do wanna get Notifications?</p>
+        </div>
+        <div class="switch small cell medium-2">
+            <input class="switch-input" id="smallSwitch4" type="checkbox" name="exampleSwitch" checked>
+            <label class="switch-paddle" for="smallSwitch4">
+              <span class="show-for-sr">Small Portions Only</span>
+            </label>
+        </div>
+      </div>
+  </div>
+  <style scoped>
+      .section{
+        margin: 40px;
+        font-family: 'Poppins';
+      }
+      .section .division{
+          margin-top: 20px !important;
+      }
+      .header{
+          font-size: 20px;
+          text-align: center;
+          font-weight: 600;
+      }
+  </style>
+{% endblock editprofile %}

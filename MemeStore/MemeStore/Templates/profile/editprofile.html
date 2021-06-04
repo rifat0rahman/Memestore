@@ -1,0 +1,45 @@
+{% extends "profile/editbase.html" %}
+
+{% block editprofile %}
+<section>
+    <!-- edit profile -->
+    <div class="tabs-panel {% if request.path == '/profile/user/editprofile/' %}is-active{% endif %}">
+        <div>
+          <div class="username">
+            <p>@{{profile.user.username}}</p>
+          </div>
+          <div class="image">
+            {% if profile.picture %}
+              <img src="{{profile.picture.url}}" 
+                  alt="current profile pic">
+            {% else %}
+            <img src="https://www.placecage.com/640/360" 
+                  alt="current profile pic">
+            {% endif %}
+          </div>
+          <form  method="POST" enctype="multipart/form-data" role="form">
+            {% csrf_token %}
+            <div class="image">
+              {{form.picture}}
+            </div>
+            <div class="name">
+              <label for="name">Change your Name</label>
+              {{form.name}}
+            </div>
+            <div class="bio">
+              <label for="bio" >Change your Bio</label>
+              {{form.bio}}
+            </div>
+            <div class="btn">
+              <button class="button hollow secondary">Update</button>
+            </div>
+          </form>
+          <div class="note">
+            <p>Note:  you can't change your username and email but we are running a compaign to know 
+              whether it's a problem.
+            </p>
+          </div>
+        </div>
+      </div>
+</section>
+{% endblock editprofile %}

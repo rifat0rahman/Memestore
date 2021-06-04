@@ -1,0 +1,234 @@
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+ /* media screen role play */
+ 
+ @media only screen and (max-width: 680px) {
+     #timeline .card {
+         width: 90% !important;
+         margin: auto;
+         padding: 10px;
+     }
+     #timeline .img {
+         width: 100% !important;
+         object-fit: cover;
+         padding: 10px;
+         height: 100% !important;
+     }
+ }
+ 
+ @media only screen and (max-width: 500px) {
+     #timeline .card {
+         width: 98% !important;
+         margin: auto;
+         padding: 10px;
+     }
+     #timeline .img {
+         width: 100% !important;
+         height: 100% !important;
+         object-fit: cover;
+         padding: 10px;
+         margin: auto;
+     }
+ }
+ 
+ @media only screen and (min-width:680px) {
+     #timeline .container {
+         width: 700px;
+         margin: auto;
+     }
+     #timeline .img {
+         width: 100% !important;
+         height: 100% !important;
+         object-fit: cover;
+         margin: auto;
+     }
+ }
+ /* media role end */
+ 
+ #timeline .loading {
+     width: 300px;
+     margin: auto;
+ }
+ 
+ #timeline .upvote {
+     font-family: "Poppins";
+     font-size: 12px;
+     margin: 0px;
+     padding: 0px;
+     position: relative;
+     top: 14px;
+     left: 10px;
+ }
+ 
+ #timeline .unliked {
+     background: white !important;
+     color: rgb(141, 141, 141);
+ }
+ 
+ #timeline .liked {
+     background: white !important;
+     color: rgb(0, 0, 0);
+ }
+ 
+ #timeline .caption {
+     font-family: 'Poppins';
+     font-size: 15px;
+     margin-left: 5px;
+ }
+ 
+ #timeline .likes {
+     background: rgb(255, 51, 0);
+     border-radius: 100px;
+     color: rgb(255, 255, 255);
+ }
+ 
+ i {
+     cursor: pointer;
+ }
+ 
+ #timeline .lastcomment {
+     font-size: 14px;
+     margin-top: 10px;
+     font-family: 'Poppins';
+ }
+ 
+ #timeline .datetime {
+     font-family: Arial, Helvetica, sans-serif;
+     font-size: 12px;
+     color: rgb(54, 54, 54);
+     padding-left: 5px;
+ }
+ 
+ #timeline .card-width {
+     width: 90px;
+ }
+ 
+ #timeline .img {
+     padding: 0px 20px;
+     width: 100%;
+     height: 700px;
+     object-fit: cover;
+ }
+ 
+ #timeline .comment button:focus {
+     outline: none;
+ }
+ 
+ #timeline .comment input:focus {
+     outline: none;
+     border: 1px solid rgb(240, 240, 240);
+     box-sizing: border-box;
+     box-shadow: none;
+ }
+ 
+ #timeline .comment .disabled {
+     color: rgb(90, 90, 90);
+     font-family: 'Poppins';
+ }
+ 
+ #timeline .comment #enabled {
+     color: rgb(0, 157, 248);
+     font-family: 'Poppins';
+ }
+ 
+ #timeline .comment input {
+     border: 1px solid rgb(230, 230, 230);
+     border-bottom: 1px solid white;
+ }
+ 
+ #timeline .comment button {
+     float: right;
+     position: absolute;
+     bottom: 10px;
+     right: 10px;
+     color: rgb(0, 119, 255);
+     cursor: pointer;
+ }
+ 
+ #timeline .comment {
+     position: relative;
+     top: 5px;
+ }
+ 
+ #timeline .haha-com .material-icons {
+     position: relative;
+     bottom: 35px;
+     font-size: 30px;
+     margin-left: 10px;
+ }
+ 
+ #timeline .card {
+     padding: 0px !important;
+ }
+ 
+ #timeline .username a {
+     margin-left: 10px;
+     font-weight: 600;
+     font-family: monospace;
+     font-size: 17px;
+     color: rgb(70, 70, 70);
+ }
+ 
+ #timeline .profile_pic {
+     width: 40px;
+     height: 40px;
+     padding: 0px;
+     margin: 8px;
+     position: relative;
+     margin-bottom: 15px;
+     top: 5px;
+     border-radius: 50%;
+     border: 2px solid rgba(0, 0, 0, 0.336);
+     object-fit: cover;
+ }
+ 
+ #timeline .container {
+     margin-top: 20px;
+ }
+ 
+ #timeline .slides {
+     color: red;
+     background: #000;
+ }
+ 
+ #timeline .orbit-bullets button {
+     width: 0.5rem;
+     height: 0.5rem;
+     margin: .1rem;
+     border-radius: 50%;
+     background-color: #cacaca;
+ }
+ 
+ #timeline .orbit-bullets button.is-active {
+     background-color: #008cff;
+ }
+ 
+ #timeline .orbit-next,
+ #timeline .orbit-previous {
+     position: absolute;
+     top: 50%;
+     -webkit-transform: translateY(-50%);
+     -ms-transform: translateY(-50%);
+     transform: translateY(-50%);
+     z-index: 10;
+     color: #ebebeb;
+ }
+ 
+ #timeline .orbit-previous:hover {
+     background-color: transparent;
+ }
+ 
+ #timeline .orbit-previous:focus {
+     color: rgb(255, 241, 241);
+     background-color: transparent;
+     outline: none;
+ }
+ 
+ #timeline .orbit-next:hover {
+     background-color: transparent;
+ }
+ 
+ #timeline .orbit-next:focus {
+     color: rgb(255, 241, 241);
+     background-color: transparent;
+     outline: none;
+ }

@@ -1,0 +1,65 @@
+{% extends "timeline/base.html" %}
+{% block content %}
+<div class="content">
+    {% for user in users %}
+    <div class="callout" data-closable="slide-out-right">
+      <span style="display:block;">
+        {% if user.profile.picture %}
+          <img src="{{user.profile.picture.url}}" alt="pro" class="profile_pic">
+        {% else %}
+        <img src="https://www.placecage.com/640/360" class="profile_pic">
+        {% endif %}
+        <span class="username">
+            <a href="{% url 'profile' user %}">{{user}}</a>
+        </span>
+        <span class="follow">
+            <a class="button small warning" href="{% url 'follow' user.username 'follow' %}">
+                FOLLOW
+            </a>
+        </span>
+      </span>
+    </div>
+    {% endfor %}
+</div>
+{% if not users %}
+  <div class="error">
+    <p>No one is  matched</p>
+  </div>
+{% endif %}
+<style scoped>
+  @media only screen and (min-width:900px) {
+   .content{
+     width:700px !important;
+     margin: auto;
+   }
+}
+  .error{
+    text-align: center;
+    font-family:'Poppins';
+  }
+    .follow{
+        float: right;
+    }
+    .content{
+        width: 70%;
+        margin: auto;
+        margin-top: 20px;
+    }
+    .profile_pic {
+    width: 40px;
+    height: 40px;
+    top: 5px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.336);
+    object-fit: cover;
+  }
+  .username a {
+    margin-left: 5px;
+    margin-right: 10px;
+    font-weight: bold;
+    font-family: "Poppins";
+    font-size: 15px;
+    color: rgb(70, 70, 70);
+  }
+</style>
+{% endblock content %}

@@ -1,0 +1,112 @@
+{% extends "timeline/base.html" %}
+{% block content %}
+<section class="sec">
+  {% for notification in notifications  %}
+  {% if notification.noti_type == 1 %}
+  <div class="content">
+    <div class="callout" data-closable="slide-out-right">
+      <span style="display:block;">
+        {% if notification.sender.profile.picture %}
+          <img src="{{notification.sender.profile.picture.url}}" alt="pro" class="profile_pic">
+        {% else %}
+        <img src="https://www.placecage.com/640/360" class="profile_pic">
+        {% endif %}
+        <span class="username"><a href="">{{notification.sender}}</a>
+          {{notification.text_preview}}
+        </span>
+      </span>
+      <small>{{notification.date}}</small>
+      <a href="{% url 'delnotitification' notification.id %}" class="close-button"  aria-label="Dismiss alert" type="button" data-close>
+        <span aria-hidden="true">&times;</span>
+      </a>
+    </div>
+  </div>
+  {% endif %}
+  {% if notification.noti_type == 2 %}
+  <div class="content">
+    <div class="callout" data-closable="slide-out-right">
+      <span style="display:block;">
+        {% if notification.sender.profile.picture %}
+          <img src="{{notification.sender.profile.picture.url}}" alt="pro" class="profile_pic">
+        {% else %}
+        <img src="https://www.placecage.com/640/360" class="profile_pic">
+        {% endif %}
+        <span class="username"><a href="">{{notification.sender}}</a>
+          {{notification.text_preview}}
+          
+        </span>
+      </span>
+      <small>{{notification.date}}</small>
+      <a href="{% url 'delnotitification' notification.id %}" class="close-button"  aria-label="Dismiss alert" type="button" data-close>
+        <span aria-hidden="true">&times;</span>
+      </a>
+    </div>
+  </div>
+  {% endif %}
+  {% if notification.noti_type == 3 %}
+  <div class="content">
+    <div class="callout" data-closable="slide-out-right">
+      <span style="display:block;">
+        {% if notification.sender.profile.picture %}
+          <img src="{{notification.sender.profile.picture.url}}" alt="pro" class="profile_pic">
+        {% else %}
+        <img src="https://www.placecage.com/640/360" class="profile_pic">
+        {% endif %}
+        <span class="username"><a href="">{{notification.sender}}</a>
+          {{notification.text_preview}}
+        </span>
+      </span>
+      <small>{{notification.date}}</small>
+      <a href="{% url 'delnotitification' notification.id %}" class="close-button"  aria-label="Dismiss alert" type="button" data-close>
+        <span aria-hidden="true">&times;</span>
+      </a>
+    </div>
+  </div>
+  {% endif %}
+  {% endfor %}
+</section>
+<style scoped>
+  @media only screen and (max-width: 680px) {
+      .content{
+        width: 90%;
+        margin: auto;
+        font-size: 12px !important;
+      }
+}
+
+@media only screen and (min-width:680px) {
+    .content{
+        width: 700px;
+        margin: auto;
+    }
+}
+/* ROLE PLAY; */
+  .content {
+    margin-top: 20px;
+    font-size: 15px;
+    font-family: 'Poppins';
+  }
+
+  .profile_pic {
+    width: 40px;
+    height: 40px;
+    padding: 0px;
+    margin: 8px;
+    position: relative;
+    margin-bottom: 15px;
+    top: 5px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.336);
+    object-fit: cover;
+  }
+
+  .username a {
+    margin-left: 5px;
+    margin-right: 10px;
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 15px;
+    color: rgb(70, 70, 70);
+  }
+</style>
+{% endblock content %}

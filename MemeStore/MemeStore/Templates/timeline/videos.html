@@ -1,0 +1,301 @@
+{% extends "timeline/base.html" %}
+{% load static %}
+{% block content %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <!-- posts -->
+    <section id="timeline">
+    <section id="app2">
+        {% for post in videos %}
+        <section class="container">
+            <div>
+                <div class="grid-x grid-padding-x align-center">
+                    <div class="orbit cell small-10 card" role="region" aria-label="Favorite Space Pictures" data-orbit
+                        data-auto-play="false">
+                        <div class="orbit-wrapper">
+                            <div class="orbit-controls">
+                                <!-- top section -->
+                                <div>
+                                    <div>
+                                        <span style="display:block;">
+                                            <a href="{% url 'profile' post.user.username %}">
+                                                {% if post.user.profile.picture %}
+                                                <img src="{{post.user.profile.picture.url}}" alt="" class="profile_pic">
+                                                {% else %}
+                                                <img src="https://www.placecage.com/640/360" alt="" class="profile_pic">
+                                                {% endif %}
+                                            </a>
+                                            <span class="username"><a
+                                                    href="{% url 'profile' post.user.username %}">{{post.user.username}}</a>
+                                                <span class="datetime"> {{post.post_time|naturaltime}}</span></span>
+                                        </span>
+                                    </div>
+                                </div>
+                                {% if post.content.all|length > 1 %}
+                                <button class="orbit-previous"><span class="show-for-sr">Previous
+                                        Slide</span>&#9664;&#xFE0E;</button>
+                                <button class="orbit-next"><span class="show-for-sr">Next
+                                        Slide</span>&#9654;&#xFE0E;</button>
+                                {% endif %}
+
+                            </div>
+                            <ul class="orbit-container">
+                                {% for content in post.content.all %}
+                                {% if content.file.name|slice:"-3:" == 'mp4' %}
+                                <li class="is-active orbit-slide">
+                                    <figure class="orbit-figure">
+                                        <video width="320" height="240" class="orbit-image img" alt="meme" controls>
+                                            <source src="{{content.file.url}}" type="video/mp4">
+                                        </video>
+                                    </figure>
+                                </li>
+                                {% elif content.file.name|slice:"-3:" == 'gif' %}
+                                <li class="is-active orbit-slide">
+                                    <figure class="orbit-figure">
+                                        <img src="{{content.file.url}}" class="orbit-image img" alt="meme">
+                                    </figure>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div>
+                            <nav class="orbit-bullets">
+                                {% for content in post.content.all %}
+                                <button data-slide="1" class="slides" disabled><span class="show-for-sr">first slide
+                                        details.</span></button>
+                                {% endfor %}
+                            </nav>
+                            <div class="haha-com">
+                                <p class="upvote like-count{{post.id}}">{{post.likes}} upvote</p>
+                            
+                                    <div class="grid-x" style="width:100px;">
+                                            <div class="cell small-6">
+                                                <form method="POST" class='like-form' id='{{post.id}}'>
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="post_id" value={{post.id}}>
+                                                    <button type="submit" class="like-btn{{post.id}}">
+                                                        {% if user.id not in post.likes_as_flat_user_id_list %}
+                                                        <i class="material-icons unliked">thumb_up</i> 
+                                                        {% else %}
+                                                        <i class="material-icons liked">thumb_up</i>
+                                                        {% endif %}
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            <div class="small-5">
+                                                <a href="{% url 'postdetails' post.id %}#comments"><i
+                                                    class="material-icons">chat_bubble_outline</i></a>
+                                            </div>
+                                    </div>
+                            </div>                            
+                            <div>
+                                {% if post.caption %}
+                                <span class="username"><a href="">{{post.user.username}}</a></span>
+                                <span class="caption"> {{post.caption}}</span>
+                                {% for tag in post.tags.all %}
+                                <a href="">{{tag}}</a>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <!-- update comments -->
+                            <div class="lastcomment">
+                                {% if post.comments.last.comment %}
+                                <span class="username"><a href="">{{post.user.username}}</a></span>
+                                <span>{{post.comments.last.comment|truncatechars:30 }}</span>
+                                <span class="datetime">{{post.comments.last.comment_time|naturaltime}}</span>
+                                {% endif %}
+                            </div>
+
+                            <!-- instant comment ,used vuejs here-->
+                            <div class="lastcomment" v-show='iscomment[{{forloop.counter0}}]'>
+                                <span class="username"><a href="">{{post.user.username}}</a></span>
+                                <span>[[showcomment]]</span>
+                            </div>
+                            <!-- comment section ,used vuejs here-->
+                            <div style="height: 59px;">
+                                <div class="comment">
+                                    <span><input type="text" class="input" placeholder="comment here...."
+                                            v-model="comment[{{forloop.counter0}}]"
+                                            @input="ableclick({{forloop.counter0}})">
+                                        <span><button @click.prevent="Comment('{{post.id}}',{{forloop.counter0}})"
+                                                :id="[enabled[{{forloop.counter0}}]]"
+                                                class='disabled'>Comment</button></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- comment end -->
+
+                        </div>
+                    </div>
+                </div>
+        </section>
+        {% endfor %}
+    </section>
+</section>
+</body>
+
+</html>
+<script>
+    var app = new Vue({
+        el: '#app2',
+        delimiters: ['[[', ']]'],
+        data: {
+            // too complex for not having vue cli,if,would have been better
+            comment: [],
+            enabled: [],
+            showcomment: '',
+            iscomment: [],
+            isliked: [],
+            count_like: []
+        },
+        methods: {
+            Comment(postid, index) {
+                this.iscomment[index] = false
+                // post to django comment url to get the data in djanog view
+                if (this.comment[index]) {
+                    axios({
+                        method: "POST",
+                        url: "{% url 'comment' %}",
+                        headers: { 'X-CSRFTOKEN': '{{ csrf_token }}', 'Content-Type': 'application/json' },
+                        data: { 'comment': this.comment[index], 'postid': postid },
+                    }).then(data => {
+                        this.showcomment = data.data.data.comment
+                        this.comment[index] = ''
+                        this.iscomment[index] = true
+                        this.enabled[index] = ''
+                    })
+                }
+            },
+            // changing the color of comment button depends on input
+            ableclick(index) {
+                if (this.comment[index]) {
+                    this.enabled[index] = 'enabled'
+                }
+                else {
+                    this.enabled[index] = ''
+                }
+            },
+            // like func
+            like(postid, index) {
+                axios({
+                    method: "POST",
+                    url: "{% url 'likes' %}",
+                    headers: { 'X-CSRFTOKEN': '{{ csrf_token }}', 'Content-Type': 'application/json' },
+                    data: { 'postid': postid }
+                }).then(data => {
+                    this.isliked[index] = data.data.isliked
+                    this.count_like[index] = data.data.data
+                })
+            }
+        }
+    })
+</script>
+
+
+<!-- css -->
+<style scoped>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+    /* media screen role play */
+    @media only screen and (max-width: 700px) {
+        .card {
+            width: 90% !important;
+            margin: auto;
+            padding: 10px;
+        }
+        .img {
+            width: 90% !important;
+            height: 100% !important;
+            object-fit: cover;
+            margin: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    @media only screen and (max-width: 500px) {
+        .card {
+            width: 98% !important;
+            margin: auto;
+            padding: 10px;
+        }
+        .img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover;
+            margin: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    @media only screen and (min-width:700px) {
+        .container {
+            width: 700px !important;
+            margin: auto;
+        }
+
+        .img {
+            width: 100% !important;
+            height: 700px !important;
+            object-fit: cover;
+            margin: auto;
+        }
+
+}
+    video:focus {
+        outline: none;
+    }
+
+</style>
+<script>
+    $('.like-form').submit(function(e){
+                    e.preventDefault()
+                    
+                    const post_id = $(this).attr('id')
+                    
+                    const likeText = $(`.like-btn${post_id}`).children().attr('class')
+    
+    
+                    const trim = $.trim(likeText)
+                    
+                    const url =`{% url 'likes' %}`
+    
+                    let res;
+                    const likes = $(`.like-count${post_id}`).text()
+                    const trimCount = parseInt(likes)
+    
+                    $.ajax({
+                        type: 'POST',
+                        url:url,
+                        data: {
+                            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+                            'post_id':post_id,
+                        },
+                        success: function(response) {
+                            console.log(response)
+                            if(response.isliked === 0) {
+                                $(`.like-btn${post_id}`).children().attr('class','material-icons liked');
+                                res = response.likes
+                            } else {
+                                $(`.like-btn${post_id}`).children().attr('class','material-icons unliked');
+                                res = response.likes
+                            }
+    
+                            $(`.like-count${post_id}`).text(res + ' upvote')
+                        },
+                        error: function(response) {
+                            console.log('error', response)
+                        }
+                    })
+                    
+                })
+    
+    </script>
+{% endblock content %}

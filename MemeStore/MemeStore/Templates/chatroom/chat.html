@@ -1,0 +1,18 @@
+{% extends "timeline/base.html" %}
+{% block content %}
+<section id="chat">
+  <div>
+    <div>
+      {% block massage %}
+
+    {% endblock massage %}
+    </div>
+  </div>
+  {% if request.path == '/chat/' %}
+  <div style="position: relative;text-align: center;">
+    <h4>YOU HAVE NO CHAT MESSAGES</h4>
+    <small>To start a chat > go to profile > click on the chat icon.</small>
+  </div>
+  {% endif %}
+</section>
+{% endblock content %}

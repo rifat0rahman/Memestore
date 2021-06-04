@@ -1,0 +1,185 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+    <!-- vue axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- vue axios -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Train+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/motion-ui@1.2.3/dist/motion-ui.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
+        integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- my css links -->
+
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    <link rel="stylesheet" href="{% static 'editprofile.css' %}">
+    <link rel="stylesheet" href="{% static 'post.css' %}">
+    <link rel="stylesheet" href="{% static 'chatroom.css' %} ">
+    <link rel="stylesheet" href="{% static 'profile.css' %} ">
+    <link rel="stylesheet" href="{% static 'postdetails.css' %} ">
+    <link rel="stylesheet" href="{% static 'timeline.css' %} ">
+
+    <!-- site icon -->
+    <link rel="icon" href="{% static "img/favicon.ico" %}">
+    <!-- my css end -->
+    <title>MemeStore</title>
+</head>
+
+
+
+
+<body class="html " id="page">
+    <!-- nav sections -->
+    <section data-sticky-container id="base">
+        <div class="sticky" data-sticky data-options="anchor: page; marginTop: 0; stickyOn: small ">
+
+
+            <div class="title-bar res-div ">
+                <button class="menu-icon " type="button " data-toggle="offCanvas "></button>
+                <div class="title-bar-title "><a href="/ ">MemeStore</a></div>
+                <li class="profile-icon ">
+                    {% if request.user.profile.picture %}
+                    <a href="{% url 'profile' request.user %} "><img src="{{request.user.profile.picture.url}} "></a>
+                    {% else %}
+                    <a href="{% url 'profile' request.user %} "><img src="https://www.placecage.com/640/360 "></a>
+                    {% endif %}
+                </li>
+            </div>
+
+
+
+            <div class="off-canvas position-left" id="offCanvas" data-off-canvas>
+                <!-- Your menu or Off-canvas content goes here -->
+                <ul class="menu vertical sidebar-all ">
+                    <li><a href="{% url 'home' %} ">Home</a></li>
+                    <li><a href="{% url 'videos' %} ">Video</a></li>
+                    <li><a href="{% url 'chat' %} ">Chat</a></li>
+                    <li><a href="{% url 'notification' %} ">notification</a></li>
+                    <li><a href="{% url 'post' %} ">Post</a></li>
+                    <li><a href="{% url 'account_logout' %} ">Logout</a></li>
+
+                    <li class="search-div ">
+                        <form method="GET" name="search" action="{% url 'search' %} ">
+                            <input type="text" placeholder="search.. " name='search'>
+                            <input type="submit" class="s-sub " value="Search">
+                        </form>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- main contain -->
+            <div class="top-bar-container main-nav off-canvas-content " data-off-canvas-content>
+                <div class="top-bar-right nav data-contain ">
+                    <ul class="dropdown menu nav ">
+                        <a href="/ " class="logo ">MemeStore</a>
+                        <li>
+                            <a href="{% url 'home' %} "><i
+                                    class="material-icons {% if request.path == '/timeline/' %}active{% endif %} ">house</i></a>
+                        </li>
+                        <li>
+                            <a href="{% url 'videos' %} "><i
+                                    class="material-icons {% if request.path == '/videos/' %}active{% endif %} ">
+                                    play_circle_outline</i>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'notification' %} ">
+                                <i
+                                    class="material-icons {% if request.path == '/notification/' %}active{% endif %} ">notifications_none</i>
+                                <span class="badge ">{{count_notifications}}</span>
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a href="{% url 'chat' %} ">
+                                <i class="material-icons rounte_active ">
+                                    inbox</i>
+                                <span class="badge ">{{count_msg}}</span>
+                            </a>
+                        </li>
+                        <li>
+
+
+                            <a href="{% url 'post' %} ">
+                                <i
+                                    class="material-icons {% if request.path == '/post/' %}active{% endif %} ">add_circle_outline</i>
+                            </a>
+                        </li>
+
+                        <!-- search -->
+                        <li class="search ">
+                            <form method="GET " name="mainsearch" action="{% url 'search' %} ">
+                                <input type="text " placeholder="search.. " name='search'>
+                                <!-- for getting sumitted with a tag -->
+                                <a onClick="document.mainsearch.submit()" class="material-icons ">search</a>
+                            </form>
+                        </li>
+
+                        <!-- end search -->
+                        <li class="profile-icon">
+                            {% if request.user.profile.picture %}
+                            <img src="{{request.user.profile.picture.url}} " data-toggle="example-dropdown"> 
+                            {% else %}
+                            <img src="https://www.placecage.com/640/360 " data-toggle="example-dropdown">
+                            {% endif %}
+                        </li>
+                        <!-- dropdown -->
+                        <div class="dropdown-pane bottom dropdown-prof" id="example-dropdown" data-dropdown>
+                            <a href="{% url 'profile' request.user %} ">
+                                <span>
+                                    <i class="material-icons ">person</i>Profile
+                                </span>
+                            </a>
+                            <a href="{% url 'editprofile' %} ">
+                                <span>
+                                    <i class="material-icons ">settings</i>Settings
+                                </span>
+                            </a>
+                            <a href="{% url 'account_logout' %} ">
+                                <span>
+                                    <i class="material-icons ">logout</i>Logout
+                                </span>
+                            </a>
+                          </div>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- main contain ends -->
+        </div>
+    </section>
+
+    <!-- others content -->
+    {% block content %} {% endblock content %}
+
+
+</body>
+<!-- js -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js "
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin=" anonymous "></script>
+<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js "
+    integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin=" anonymous "></script>
+<script>
+    $(document).foundation();
+    localStorage.setItem("scrollTop ", document.body.scrollTop);
+    window.onload = function () {
+        var scroll = parseInt(localStorage.getItem("scrollTop "));
+        //parseInt(localStorage.scrollTop);   
+        if (!isNaN(scroll))
+            document.body.scrollTop = scroll;
+    }
+</script>
+
+
+</html>

@@ -1,0 +1,188 @@
+{% extends "account/base.html" %}
+{% load socialaccount %}
+{% load i18n %}
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+{% block content %}
+<!-- html are here -->
+<!-- allauth customize -->
+
+<body class="html">
+  <div class="grid-container container" style="font-family: Poppins;">
+      <div class="grid-x grid-margin-x">
+          <div class="sub-container text-center">
+              <div class="logo">
+                  <p>MemeStore</p>
+              </div>
+              <div class="leading-head">
+                  <p>sign up to have a fun day with MemeStore.Who doesn't like meme?
+                      You can see memes,post memes and even sleep on memes!</p>
+              </div>
+              <div class="margin signups">
+                  <b>Sign Up</b>
+              </div>
+          </div>
+          <!-- login form is here -->
+          <div class="medium-12 cell">
+              <div class="grid-container sub-container">
+                  <div class="">
+                      <!-- form is here -->
+                      <form class="signup grid-x grid-margin-x" id="signup_form" method="post"
+                          action="{% url 'signup' %}">
+                          {% csrf_token %}
+                          <div class="medium-12 cell margin">
+                              <label>
+                                  {{ form.as_p }}
+                              </label>
+                          </div>
+                          {% if redirect_field_value %}
+                          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                          {% endif %}
+                          <div class="medium-12 cell expanded button-group">
+                              <button class="button black">Sign Up</button>
+                          </div>
+                      </form>
+                      <!-- form is here -->
+                      <div class="text-center medium-12 cell">
+                          <p class="text-center">------------------or------------------</p>
+                      </div>
+                      <div class="medium-12  cell text-center expanded button-group">
+                          <a href="{% provider_login_url 'google' %}" class="button warning">
+                              <span><i class="fa fa-google 5x"></i> Sign In With Google</span>
+                          </a>
+                      </div>
+                      <div class="medium-12 cell text-center margin">
+                          Have an account already? <span><a href="{% url 'login' %}">Log in</a></span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- login form end here -->
+      </div>
+  </div>
+  <footer class="grid-container footer">
+    <div class="grid-x grid-margin-x">
+        <div class="medium-12 cell">
+            <a href="">About </a><span><a href="">Privacy</a></span>
+            <span><a href="">Policy</a></span>
+            <span><a href="">Blog</a></span>
+            <span><a href="">Job</a></span>
+            <span><a href="">Hashtags</a></span>
+            <span><a href="">Trendings</a></span>
+            <span><a href="">Hiring</a></span>
+            <span><a href="">Locations</a></span>
+            <span><a href="">Terms</a></span>
+        </div>
+        <div class="medium-12 cell">
+            <p>© 2021 MemeStore by MemeStore</p>
+        </div>
+    </div>
+</footer>
+</body>
+
+<!-- styles are here -->
+
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+/* media screen role play */
+@media only screen and (max-width: 700px) {
+  .container {
+    width: 90% !important;
+    font-size: 13px;
+    top:20px !important;
+  }
+  .sub-container{
+      width: 90% !important;
+  }
+  .logo{
+      font-size: 35px !important;
+  }
+  .footer{
+      top: 40px !important;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .container {
+    width: 90% !important;
+    font-size: 13px;
+    top:2px !important;
+  }
+  .sub-container{
+      width: 90% !important;
+  }
+  .logo{
+      font-size: 35px !important;
+  }
+  .footer{
+      display: none;
+  }
+  .leading-head{
+      display:none;
+  }
+  .signups{
+      display: none;
+  }
+}
+@media only screen and (min-width: 700px) {
+  .container {
+    width: 550px !important;
+  }
+ 
+}
+
+/* media role end */
+
+  .logo{
+      font-family:'Train One', cursive,monospace;
+      font-size: 40px;
+  }
+  form input{
+      border-radius: 10px !important;
+  }
+  .footer{
+      position: relative;
+      top:100px;
+      font-size: 15px;
+      text-align: center;
+  }
+  .footer a,.footer p{
+      color: rgb(155, 155, 155);
+      margin: 10px;
+  }
+  .html{
+      background-color: rgb(245, 245, 245);
+  }
+  .button{
+      border-radius: 6px 6px;
+  }
+  .container{
+      position: relative;
+      top:50px;
+      margin: auto;
+      width:50%;
+      padding: 10px;
+      color: rgb(61, 61, 61);
+      background: rgb(255, 253, 253);
+      border-radius: 20px 20px;
+  }
+  .sub-container{
+      position: relative;
+      margin: auto;
+      width:70%;
+  }
+  .margin{
+      margin:10px;
+  }
+  .black{
+      color: rgb(253, 253, 253);
+      background: rgb(27, 27, 27);
+      margin-right: 10px;
+  }
+  .black:hover{
+      background: #000;
+  }
+  </style>
+
+{% endblock %}
+
+

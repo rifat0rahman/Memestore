@@ -1,0 +1,213 @@
+/* media screen role play */
+
+@media only screen and (max-width: 800px) {
+    #base .res-div {
+        display: block !important;
+    }
+    #base .main-nav {
+        display: none;
+    }
+    #base .profile-icon {
+        position: absolute;
+        right: 1px;
+        top: 0px;
+    }
+    #base .dropdown-prof a:hover {
+        border-bottom: 1px solid rgb(221, 221, 221);
+    }
+    #base .dropdown-prof i {
+        position: relative;
+        top: 5px;
+        margin: 5px !important;
+    }
+    #base .dropdown-prof {
+        width: 200px;
+    }
+}
+
+@media only screen and (min-width:900px) {
+    #base .data-contain {
+        width: 900px;
+        margin: auto;
+    }
+}
+
+
+/* media end here */
+
+#base .position-left {
+    background: white !important;
+    border-right: 10px solid rgb(53, 53, 53) !important;
+}
+
+#base .position-left li {
+    margin: 8px;
+    color: black;
+    font-size: 20px;
+}
+
+#base .position-left li a {
+    color: black;
+    font-family: 'Poppins';
+}
+
+#base .position-left .search-div {
+    text-align: center;
+}
+
+#base .position-left .search-div input {
+    margin-top: 20px;
+    position: relative;
+    left: 0px !important;
+    width: 200px;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+
+#base .position-left .s-sub {
+    width: 80px !important;
+    font-size: 18px;
+    background: rgb(252, 251, 251);
+    color: rgb(36, 36, 36);
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    margin-top: 5px;
+    padding: 5px;
+}
+
+#base .res-div {
+    display: none;
+    border-bottom: 1px solid rgb(218, 218, 218);
+    padding: 10px;
+    background: white;
+}
+
+#base .res-div a {
+    color: rgb(61, 61, 61);
+    font-size: 25px !important;
+    margin-left: 10px;
+}
+
+#base .title-bar-title {
+    font-family: 'Train One', cursive, monospace;
+    font-weight: 500 !important;
+}
+
+#base .position-left {
+    min-height: 955px;
+}
+
+#base .search {
+    width: 200px;
+    position: relative;
+    right: 20px;
+}
+
+#base .search input {
+    width: 70%;
+    position: absolute;
+    height: 30px;
+    top: 10px;
+    left: 45%;
+    border: 1px solid white;
+    border-radius: 5px;
+    background: rgb(245, 243, 243);
+}
+
+#base .search a {
+    width: 20%;
+    position: absolute;
+    left: 95%;
+}
+
+#base .search input:focus {
+    outline: 0;
+    border: 1px solid white;
+}
+
+#base .badge {
+    position: relative;
+    bottom: 17px;
+    left: -10px;
+    background: rgb(20, 20, 20);
+    color: rgb(214, 214, 214);
+    border: 1px solid black
+}
+
+#base .active {
+    color: rgb(54, 54, 54);
+    border: 1px solid rgb(202, 202, 202);
+    border-radius: 50%;
+}
+
+#base .dropdown-prof a:hover {
+    border-bottom: 1px solid rgb(221, 221, 221);
+}
+
+#base .dropdown-prof i {
+    position: relative;
+    top: 5px;
+    margin: 5px;
+}
+
+#base .dropdown-prof {
+    width: 200px;
+}
+
+#base .profile-icon {
+    margin-left: auto;
+    padding: 10px;
+    padding-right: 20px;
+}
+
+#base .profile-icon img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(0, 0, 0, 0.452);
+    cursor: pointer;
+}
+
+#base .sticky {
+    width: 100%;
+}
+
+#base .material-icons {
+    font-size: 25px;
+}
+
+#base .logo {
+    font-family: 'Train One', cursive, monospace;
+    font-size: 22px;
+}
+
+#base .menu-icon {
+    color: rgb(48, 48, 48);
+    background: #000;
+}
+
+#base .html {
+    background-color: rgb(252, 252, 252);
+}
+
+#base .side-nav {
+    color: rgb(48, 48, 48);
+    background-color: rgb(255, 255, 255);
+}
+
+#base .main-nav {
+    color: rgb(48, 48, 48);
+    background: rgb(255, 255, 255);
+    border-bottom: 1px solid rgb(218, 218, 218);
+    padding: 3px;
+}
+
+#base .nav {
+    color: rgb(48, 48, 48);
+    background-color: rgb(255, 255, 255) !important;
+}
+
+#base .nav a {
+    color: rgb(48, 48, 48);
+}

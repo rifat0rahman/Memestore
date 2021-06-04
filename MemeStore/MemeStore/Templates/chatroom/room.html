@@ -1,0 +1,205 @@
+<!-- chat/templates/chat/room.html -->
+{% extends "chatroom/chat.html" %}
+{% block massage %}
+  <section class="container" id="chat">
+    <div>
+      <div>
+        <ul class="vertical tabs full-height" data-tabs id="example-tabs">
+          {% for director in directors %}
+          <li
+            class="tabs-title userbase {% if request.resolver_match.kwargs.room_name  == director.directors %}active_chat{% endif %} ">
+            <!-- all person with having a conversation. -->
+  
+            <!-- if the creator1 is the person -->
+            <span style="display: block;">
+              {% if director.creator1 != request.user %}
+              <!-- profile image  -->
+              {% if director.creator1.profile.picture %}
+              <a href="{% url 'room' director.directors %}"><img src="{{director.creator1.profile.picture.url}}"
+                  class="pro_pic"></a>
+              {% else %}
+              <a href="{% url 'room' director.directors %}"><img src="https://www.placecage.com/640/360"
+                  class="pro_pic"></a>
+              {% endif %}
+              <!-- profile picture end here -->
+  
+              <!-- username is here -->
+              <span>
+                <a href="{% url 'room' director.directors %}" class="username">{{director.creator1|truncatechars:8}}</a>
+              </span>
+            </span>
+            <!-- end user -->
+  
+            <!-- if the creator2 is the person -->
+            {% else %}
+            <!-- profile image  -->
+            <span style="display: block;">
+              {% if director.creator2.profile.picture %}
+              <a href="{% url 'room' director.directors %}"><img src="{{director.creator2.profile.picture.url}}" alt=""
+                  class="pro_pic"></a>
+              {% else %}
+              <a href="{% url 'room' director.directors %}"><img src="https://www.placecage.com/640/360" alt=""
+                  class="pro_pic"></a>
+              {% endif %}
+              <!-- profile picture end here -->
+  
+              <!-- user name  -->
+              <span>
+                <a href="{% url 'room' director.directors %}" class="username">{{director.creator2|truncatechars:8}}</a>
+              </span>
+            </span>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="container-msg">
+      <div class="header-msg">
+        <!-- same logic from sidebar -->
+        {% if current_person.creator1 != request.user %}
+        <span>
+          <!-- image -->
+          {% if current_person.creator1.profile.picture %}
+          <span>
+            <img src="{{current_person.creator1.profile.picture.url}}" alt="" class="pro_pic">
+          </span>
+          {% else %}
+
+          <span>
+            <img src="https://www.placecage.com/640/360" alt="" class="pro_pic">
+          </span>
+          {% endif %}
+          <!-- username -->
+          <span>
+            <a href="{% url 'profile' current_person.creator1 %}"
+              class="header_username">{{current_person.creator1}}</a>
+            <span class="join">Joined in {{current_person.joined}}</span>
+          </span>
+        </span>
+        {% else %}
+        <span>
+          <!-- image checking -->
+          {% if current_person.creator2.profile.picture %}
+          <span>
+            <img src="{{current_person.creator2.profile.picture.url}}" alt="" class="pro_pic">
+          </span>
+          {% else %}
+          <span>
+            <img src="https://www.placecage.com/640/360" alt="" class="pro_pic">
+          </span>
+          {% endif %}
+          <!-- user checking -->
+          <span>
+            <a href="{% url 'profile' current_person.creator2 %}"
+              class="header_username">{{current_person.creator2}}</a>
+            <span class="join">Joined in {{current_person.joined}} </span>
+          </span>
+        </span>
+        {% endif %}
+      </div>
+      <div>
+      <div class="tabs-content vertical main-msg" data-tabs-content="example-tabs">
+        <div class="tabs-panel is-active">
+          <div>
+            {% for message in messages %}
+            {% if message.sender == request.user %}
+            <p class="chat-user">{{message.body}}</p>
+            {% else %}
+            <p class="chat-notuser">{{message.body}}</p>
+            {% endif %}
+            {% endfor %}
+            <div id="chat-log" class="chat">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- send msg button -->
+      <div class="sendmsg grid-x">
+        <div class="cell small-5 medium-10">
+          <input type="text" id="chat-message-input" placeholder="seach..">
+        </div>
+        <span>
+          <button class="button hollow secondary" id="chat-message-submit">Send</button>
+        </span>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+  <!-- live msg websocket settings -->
+  {{ room_name|json_script:"room-name" }}
+  <script>
+window.onload=function(){
+    var elem = document.getElementsByClassName('main-msg');
+    elem.style.margin = 100 + "px" +' !important';
+
+}
+
+
+
+    const roomName = JSON.parse(document.getElementById('room-name').textContent);
+    console.log(roomName)
+    const chatSocket = new WebSocket(
+      'ws://'
+      + window.location.host
+      + '/ws/chat/'
+      + roomName
+      + '/'
+    );
+
+    chatSocket.onmessage = function (e) {
+      const data = JSON.parse(e.data);
+      var msg = document.querySelector('#chat-log')
+      if (data.sender == "{{request.user}}") {
+        msg.innerHTML += ('<p class="chat-user">' + data.message + '</p>' + '\n');
+      }
+      else {
+        msg.innerHTML += ('<p class="chat-notuser">' + data.message + '</p>' + '\n');
+      }
+    };
+
+    chatSocket.onclose = function (e) {
+      console.error('Chat socket closed unexpectedly');
+    };
+
+    document.querySelector('#chat-message-input').focus();
+    document.querySelector('#chat-message-input').onkeyup = function (e) {
+      if (e.keyCode === 13) {  // enter, return
+        document.querySelector('#chat-message-submit').click();
+      }
+    };
+
+    document.querySelector('#chat-message-submit').onclick = function (e) {
+      const messageInputDom = document.querySelector('#chat-message-input');
+      const message = messageInputDom.value;
+      chatSocket.send(JSON.stringify({
+        'message': message,
+        'sender': "{{request.user}}",
+      }));
+      messageInputDom.value = '';
+    };
+
+  </script>
+</body>
+<style scoped>
+  .rounte_active {
+    color: rgb(54, 54, 54);
+    border: 1px solid rgb(202, 202, 202);
+    border-radius: 50%;
+  }
+
+  .chat-user {
+    text-align: right;
+    margin-right: 10px;
+  }
+
+  .chat-notuser {
+    text-align: left;
+    margin-left: 10px;
+  }
+</style>
+{% endblock %}

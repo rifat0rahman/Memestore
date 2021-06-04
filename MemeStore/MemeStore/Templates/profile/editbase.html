@@ -1,0 +1,72 @@
+{% extends "timeline/base.html" %}
+{% block content %}
+{% load i18n %}
+<section id="editpro">
+  <div>
+    <!-- sidenav tabs links -->
+    <div class="grid-container">
+      <div class="grid-x long-container">
+        <div class="cell medium-4">
+          <ul class="vertical tabs" data-tabs id="example-tabs">
+            <li class="tabs-title"><a href="{% url 'editprofile' %}"
+                aria-selected="{% if request.path == '/profile/user/editprofile/' %}true{% endif %}">Edit Profile</a>
+            </li>
+            <li class="tabs-title">
+              <a href="{% url 'changepassword' %}" 
+                aria-selected="{% if request.path == '/profile/password_change/' %}true{% elif request.path == '/profile/password_set/' %}true{% endif %}">Change Password
+              </a>
+            </li>
+            <li class="tabs-title"><a href="{% url 'account_reset_password' %}"
+              aria-selected="{% if request.path == '/accounts/password/reset/' %}true{% endif %}"
+              >Forget Password</a></li>
+
+            <li class="tabs-title"><a href="{% url 'secureaccount' %}"
+              aria-selected="{% if request.path == '/profile/editprofile/secure/' %}true{% endif %}"
+              >Secure Account</a></li>
+            <li class="tabs-title"><a href="{% url 'managenotification' %}"
+              aria-selected="{% if request.path == '/profile/editprofile/managenotification/' %}true{% endif %}"
+              >Manage Notifications</a></li>
+            <li class="tabs-title"><a href="{% url 'contractus' %}"
+              aria-selected="{% if request.path == '/profile/editprofile/contract/' %}true{% endif %}"
+              >Contract Us</a></li>
+            <li class="tabs-title"><a href="{% url 'privacy' %}"
+              aria-selected="{% if request.path == '/profile/editprofile/privacy/' %}true{% endif %}"
+              >Private Policy</a></li>
+          </ul>
+        </div>
+        <!-- tab items -->
+        <div class="cell medium-8 contents">
+          <div class="tabs-content vertical" data-tabs-content="example-tabs">
+            {% block editprofile %}
+            {% endblock editprofile %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="grid-container footer">
+      <div class="grid-x grid-margin-x">
+        <div class="medium-12 cell">
+          <a href="">About </a><span><a href="">Privacy</a></span>
+          <span><a href="">Policy</a></span>
+          <span><a href="">Blog</a></span>
+          <span><a href="">Job</a></span>
+          <span><a href="">Hashtags</a></span>
+          <span><a href="">Trendings</a></span>
+          <span><a href="">Hiring</a></span>
+          <span><a href="">Locations</a></span>
+          <span><a href="">Terms</a></span>
+        </div>
+        <div class="medium-12 cell">
+          <p>© 2021 MemeStore by MemeStore</p>
+        </div>
+      </div>
+    </footer>
+</section>
+<style>
+  @media only screen and (max-width: 400px) {
+    *{
+      font-size: 12px;
+    }
+}
+</style>
+{% endblock content %}

@@ -1,0 +1,264 @@
+@media only screen and (max-width: 680px) {
+    #postdetails .card{
+        width: 90% !important;
+        margin: auto;
+        padding: 10px;
+    }
+    #postdetails .img {
+        width: 100% !important;
+        object-fit: cover;
+        padding: 10px;
+        height: 100% !important;
+    }
+}
+@media only screen and (max-width: 500px) {
+    #postdetails .card{
+        width: 98% !important;
+        margin: auto;
+        padding: 10px;
+    }
+    #postdetails .img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover;
+        padding: 10px;
+        margin: auto;
+
+    }
+}
+@media only screen and (min-width:680px) {
+    #postdetails .container{
+        width: 700px !important;
+        margin: auto;
+    }
+    #postdetails .img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover;
+        margin: auto;
+
+    }
+}
+
+/* media role end */
+
+#postdetails .upvote {
+        font-family: "Poppins";
+        font-size: 12px;
+        margin: 0px;
+        padding: 0px;
+        position: relative;
+        top: 14px;
+        left: 10px;
+
+    }
+
+    #postdetails .dislike {
+        background: white !important;
+        color: rgb(141, 141, 141);
+        cursor: pointer;
+
+    }
+
+    #postdetails .like {
+        background: white !important;
+        color: rgb(0, 0, 0);
+        cursor: pointer !important;
+    }
+
+     #app2 {
+        margin-top: 20px;
+    }
+
+    #postdetails .dropdown-pro {
+        width: 80px !important;
+        font-size: 13px;
+        height: 10px !important;
+        position: absolute;
+        top: 2px;
+    }
+
+    #postdetails .dropdown-pro a {
+        position: relative;
+        bottom: 10px;
+    }
+
+    #postdetails .dot {
+        font-size: 23px;
+        position: absolute;
+        bottom: -3px;
+        color: black;
+    }
+
+    #postdetails .comment-text a {
+        margin-right: 20px;
+        color: grey;
+    }
+
+    #postdetails .datetime {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        color: rgb(70, 70, 70);
+    }
+
+    #postdetails .comment-line {
+        border-top: 1px solid rgb(241, 241, 241);
+        margin-top: 20px;
+    }
+
+    #postdetails .comment-text {
+        padding-left: 70px;
+        color: rgb(83, 83, 83);
+        font-family: arial;
+        margin: 0px !important;
+        position: relative;
+        bottom: 15px;
+        font-size: 15px;
+    }
+
+    #postdetails .card-width {
+        width: 90px;
+    }
+
+    #postdetails ul:focus {
+        outline: 0;
+    }
+
+    #postdetails .img {
+        padding: 0px 20px;
+        width: 100%;
+        height: 700px;
+        object-fit: cover;
+
+    }
+
+    #postdetails .comment a {
+        position: relative;
+        bottom: 12px;
+    }
+
+    #postdetails .comment a:focus {
+        outline: none;
+    }
+
+    #postdetails .comment textarea:focus {
+        outline: none;
+        border: 1px solid rgb(240, 240, 240);
+        box-sizing: border-box;
+        box-shadow: none;
+    }
+
+    #postdetails .comment textarea {
+        border: 1px solid rgb(214, 214, 214);
+    }
+
+
+    #postdetails .comment {
+        position: relative;
+        top: 20px;
+        text-align: center;
+    }
+
+    #postdetails .haha-com .material-icons {
+        position: relative;
+        bottom: 35px;
+        font-size: 30px;
+        margin-left: 10px;
+    }
+
+    #postdetails .card {
+        padding: 0px !important;
+    }
+
+    #postdetails .username a {
+        margin-left: 5px;
+        font-weight: 600;
+        font-family: monospace;
+        font-size: 17px;
+        color: rgb(70, 70, 70);
+    }
+
+    #postdetails .profile_pic {
+        width: 40px;
+        height: 40px;
+        padding: 0px;
+        margin: 8px;
+        position: relative;
+        margin-bottom: 15px;
+        top: 5px;
+        border-radius: 50%;
+        border: 2px solid rgba(0, 0, 0, 0.336);
+        object-fit: cover;
+    }
+
+    #postdetails .container {
+        margin-top: 30px;
+    }
+
+    #postdetails .slides {
+        color: red;
+        background: #000;
+    }
+
+    #postdetails .orbit-bullets button {
+        width: 0.5rem;
+        height: 0.5rem;
+        margin: .1rem;
+        border-radius: 50%;
+        background-color: #cacaca;
+    }
+
+    #postdetails .orbit-bullets button.is-active {
+        background-color: #008cff;
+    }
+
+    #postdetails video:focus {
+        outline: none;
+    }
+
+    .orbit-next,
+    .orbit-previous {
+        position: absolute;
+        top: 34%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        z-index: 2;
+        color: #cccccc;
+    }
+
+    .orbit-previous:hover {
+        background-color: transparent;
+    }
+
+    .orbit-previous:focus {
+        color: rgb(255, 241, 241);
+        background-color: transparent;
+        outline: none;
+    }
+
+    .orbit-next:hover {
+        background-color: transparent;
+    }
+
+    .orbit-next:focus {
+        color: rgb(255, 241, 241);
+        background-color: transparent;
+        outline: none;
+    }
+    #postdetails .delete-post{
+        position: absolute;
+        right:0;
+        margin-right: 10px;
+        opacity: 0.8;
+    }
+    #postdetails .delete-post i{
+        color: black;
+    }
+    .has-tip {
+    position: relative;
+    display: inline-block;
+    border-bottom: none;
+    font-weight:normal;
+    cursor: pointer;
+    }

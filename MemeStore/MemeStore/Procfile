@@ -1,0 +1,1 @@
+web: gunicorn Memestore.wsgi --log-file -

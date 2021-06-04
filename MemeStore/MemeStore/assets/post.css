@@ -1,0 +1,101 @@
+#post{
+    margin-top: 10px;
+    text-align: center;
+    font-family: 'Poppins';
+}
+#post .header{
+    font-size: 25px;
+    font-family: fantasy;
+    color: rgb(56, 56, 56);
+}
+#post .image{
+    text-align: center;
+    margin-top: 50px;
+}   
+#post .image input{
+    width: 380px;
+    margin: auto;
+    border: 1px solid rgb(63, 63, 63);
+    font-size: 18px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    outline: none;
+    background: rgb(255, 255, 255);
+}
+#post ::-webkit-file-upload-button{
+    color: white;
+    background: rgb(41, 41, 41);
+    border: 1px solid white;
+    padding: 8px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+#post ::-webkit-file-upload-button:focus{
+    outline: none;
+}
+#post .caption{
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+#post .caption .file{
+    width: 380px;
+    border: 1px solid rgba(104, 104, 104, 0.87);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    height: 100px;
+
+}  
+#post .note p{
+    font-size: 12px;
+    color: rgb(70, 70, 70);
+    margin-top: 20px;
+}
+#post .footer{
+    position: relative;
+    top: 380px;
+    font-size: 15px;
+    text-align: center;
+}
+#post .footer a,.footer p{
+    color: rgb(155, 155, 155);
+    margin:10px;
+}
+
+@media only screen and (max-width: 680px) {
+    #post{
+        width: 100%;
+        margin: auto;
+        
+        margin-top: 20px;
+      }
+    #post input,#post .caption{
+        width: 90% !important;
+        margin: auto !important;
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
+    }
+    #post .footer{
+        top: 30px !important;
+    }
+  }
+  
+  @media only screen and (min-width:680px) {
+    #post{
+        width: 700px !important;
+        margin: auto;
+    }
+  }
+  /* ROLE PLAY; */

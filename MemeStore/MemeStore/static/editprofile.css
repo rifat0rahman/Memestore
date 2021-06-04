@@ -1,0 +1,135 @@
+#editpro{
+    margin-top: 30px;
+    padding: 0px;
+}
+#editpro .tabs{
+    border: none;
+    border-right: 1px solid rgb(218, 218, 218);
+}
+#editpro .long-container{
+    border: 1px solid rgb(218, 218, 218);
+    background: white;
+}
+#editpro .long-container ul li{
+    margin: 10px;
+    margin-top: 25px;
+
+}
+#editpro .long-container ul li a{
+    color: rgb(37, 37, 37);
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+#editpro .long-container ul li a:focus{
+    outline: none;
+    border-left: 1px solid rgb(49, 49, 49);
+    font-weight: 600;
+    color: rgb(54, 54, 54);
+}
+#editpro .tabs-content {
+    border: none;
+}
+
+#editpro .username{
+    font-size: 30px;
+    text-align: center;
+    font-family: 'Train One', cursive, monospace;
+}
+#editpro .image{
+    text-align: center;
+}
+#editpro .image img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    object-fit: cover;
+}
+#editpro .changeimage{
+    text-align: center;
+}
+#editpro .changeimage input{
+    display: none;
+}
+#editpro .changeimage label{
+    margin: 10px;
+    border: 1px solid rgb(48, 48, 48);
+    color: rgb(3, 3, 0);
+    background:rgb(255, 255, 255);
+    font-size: 15px;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+#editpro .name,.bio{
+    margin: 20px;
+}
+#editpro .name label,.bio label{
+    font-size: 17px;
+}
+#editpro .btn{
+    text-align: center;
+}
+#editpro .btn button{
+    color: black;
+    margin-top: 15px;
+    font-size: 15px;
+}
+#editpro .btn button:focus{
+   outline: none;
+   background: rgb(240, 240, 240);
+}
+#editpro .note p{
+    font-size: 11px;
+    position: relative;
+    top: 20px;
+    color: rgb(80, 80, 80);
+    text-align: center;
+ }
+
+ #editpro .image{
+    text-align: center;
+    margin-top: 20px;
+}   
+#editpro .image input{
+    width: 280px;
+    border: 1px solid rgb(36, 36, 36);
+    font-size: 18px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    outline: none;
+    background: rgb(255, 255, 255);
+    padding: 2px;
+}
+#editpro ::-webkit-file-upload-button{
+    color: rgb(48, 48, 48);
+    background: rgb(255, 255, 255);
+    border:1px solid rgb(58, 58, 58);
+    padding: 8px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+#editpro ::-webkit-file-upload-button:focus{
+    outline: none;
+}
+
+#editpro .footer{
+    position: relative;
+    top: 150px;
+    font-size: 15px;
+    text-align: center;
+}
+#editpro .footer a,.footer p{
+    color: rgb(155, 155, 155);
+    margin:10px;
+}

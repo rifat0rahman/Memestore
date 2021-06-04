@@ -1,0 +1,39 @@
+{% extends "profile/editbase.html" %}
+
+{% block editprofile %}
+  <div class="section">
+      <div>
+        <p>Easy Security for your MemeStore account</p>
+        <ul>
+            <li>
+                Create a complex Password & store in a Password Manager.
+                </li>
+                <li>
+                    If you’re checking your MemeStore account from any device other than your home 
+                    computer or personal cell phone, do not check ‘Keep Me Logged In’.
+                </li>
+                <li>
+                    Only accept follow requests from people you already know in the real world,
+                     or are within two degrees of separation from your personal network. 
+                </li>
+                <li>
+                    Report suspicious activity to MemeStore.
+                </li>
+                <li>
+                    Block accounts that harass or attack you on comment threads.
+                </li>
+        </ul>
+      </div>
+  </div>
+  <style scoped>
+      .section{
+          font-family: 'Poppins';
+      }
+      .section p{
+          text-align: center;
+          font-weight: 700;
+          font-size: 20px;
+          margin: 10px;
+      }
+  </style>
+{% endblock editprofile %}

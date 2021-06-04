@@ -1,0 +1,239 @@
+{% extends "timeline/base.html" %}
+{% block content %}
+{% load humanize %}
+
+<body>
+    <section id="postdetails">
+        <div class="container" id="app2">
+            <!-- post is here -->
+            <div class="grid-x grid-padding-x align-center">
+                <div class="orbit cell small-10 card" role="region" aria-label="Favorite Space Pictures" data-orbit
+                    data-auto-play="false">
+                    <div class="orbit-wrapper">
+                        <div class="orbit-controls">
+                            <!-- top section -->
+                            <div>
+                                <div>
+                                    <span style="display:block;">
+                                        {% if posts.first.user.profile.picture %}
+                                        <img src="{{posts.first.user.profile.picture.url}}" alt="pro"
+                                            class="profile_pic">
+                                        {% else %}
+                                        <img src="https://www.placecage.com/640/360" class="profile_pic">
+                                        {% endif %}
+                                        <span class="username"><a
+                                                href="{% url 'profile' posts.first.user %}">{{posts.first.user}}</a>
+                                            <span class="datetime"> {{posts.first.post_time|naturaltime}}</span>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                            {% if posts.first.content.all|length > 1 %}
+                            <button class="orbit-previous"><span class="show-for-sr">Previous
+                                    Slide</span>&#9664;&#xFE0E;</button>
+                            <button class="orbit-next"><span class="show-for-sr">Next
+                                    Slide</span>&#9654;&#xFE0E;</button>
+                            {% endif %}
+
+                        </div>
+                        <ul class="orbit-container">
+                            {% for content in posts.first.content.all %}
+                            {% if content.file.name|slice:"-3:" != 'mp4' %}
+                            <li class="is-active orbit-slide">
+                                <figure class="orbit-figure">
+                                    <img class="orbit-image img" src="{{content.file.url}}" alt="Space"
+                                        style="img:focus:none">
+                                </figure>
+                            </li>
+                            {% else %}
+                            <li class="is-active orbit-slide">
+                                <figure class="orbit-figure">
+                                    <video class="orbit-image img" alt="meme" controls>
+                                        <source src="{{content.file.url}}" type="video/mp4">
+                                    </video>
+                                </figure>
+                            </li>
+                            {% endif %}
+
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div>
+                        <nav class="orbit-bullets">
+                            {% for content in posts.first.content.all %}
+                            <button data-slide="1" class="slides" disabled><span class="show-for-sr">first slide
+                                    details.</span></button>
+                            {% endfor %}
+                        </nav>
+                        <div class="haha-com">
+                            <!-- count likes -->
+                            <div>
+                                <p class="upvote"> [[count_likes]] upvote</p>
+                            </div>
+                            <span>
+                                <span>
+                                    {% if user_likes %}
+                                    <span style="cursor:pointer">
+                                        <i class="material-icons" :class="liked"
+                                            @click="like('{{posts.first.id}}')">thumb_up</i>
+                                    </span>
+                                    {% else %}
+                                    <span>
+                                        <i class="material-icons" :class="disliked"
+                                            @click="like('{{posts.first.id}}')">thumb_up</i>
+                                    </span>
+                                    {% endif %}
+
+                                </span>
+                                <a href="#comments">
+                                    <i class="material-icons">chat_bubble_outline</i>
+                                </a>
+                            </span>
+                            {% if request.user == posts.first.user %}
+                            <span class="delete-post">
+                                <a @click="del_post('{{posts.first.id}}')">
+                                    <i class="material-icons" 
+                                   data-tooltip
+                                   title="delete the post">
+                                    remove_circle_outline
+                                </i>
+                                </a>
+                            </span>
+                            {% endif %}
+                        </div>
+                        <div>
+                            {% if posts.first.caption %}
+                            <span class="username"><a href="">{{posts.first.user.username}}</a></span>
+                            -{{posts.first.caption}}
+                            {% endif %}
+                        </div>
+                        <!-- endpost -->
+                        <!-- show comments -->
+                        <section class="comment-line">
+                            <div>
+                                {% for comment in posts.first.comments.all %}
+                                <div class="comment-holder">
+                                    <div class="">
+                                        <div class="">
+                                            <span style="display:block;">
+                                                <a href="{% url 'profile' posts.first.user %}">
+                                                    {% if comment.user.profile.picture %}
+                                                    <img src="{{comment.user.profile.picture.url}}" alt="pro"
+                                                        class="profile_pic">
+                                                    {% else %}
+                                                    <img src="https://www.placecage.com/640/360" class="profile_pic">
+                                                    {% endif %}
+                                                </a>
+                                                <span class="username"><a href="">{{comment.user}}</a></span>
+                                                <span class="datetime"> {{comment.comment_time|naturaltime}}</span>
+                                                <p class="comment-text">
+                                                    {{comment.comment}}
+                                                </p>
+                                                <span class="comment-text"><a href="">like </a><a href="">reply</a>
+                                                    <a data-toggle="dot-dropdown{{forloop.counter0}}"
+                                                        class="dot">...</a>
+                                                    <!-- dropdown -->
+                                                    <div class="dropdown-pane bottom dropdown-pro"
+                                                        id=dot-dropdown{{forloop.counter0}} data-dropdown>
+                                                        <a href="">delete</a>
+                                                    </div>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <!-- comment box -->
+                            <div>
+                                <div class="comment">
+                                    <form>
+                                        <span>
+                                            <textarea class="input" placeholder="comment..." cols='1' rows="2"
+                                                v-model="comment"></textarea>
+                                            <a href="#comments" class="button hollow small secondary"
+                                                @click="Comment('{{posts.first.id}}')" id="comments">Comment</a>
+                                        </span>
+                                    </form>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app2',
+        delimiters: ['[[', ']]'],
+        data: {
+            // too complex for not having vue cli,if,would have been better
+            comment: "",
+            isliked: '',
+            count_likes: '',
+            liked: 'liked',
+            disliked: 'dislike',
+        },
+        methods: {
+            Comment(postid) {
+                // post to django comment url to get the data in djanog view
+                console.log(postid)
+                if (this.comment) {
+                    axios({
+                        method: "POST",
+                        url: "{% url 'comment' %}",
+                        headers: { 'X-CSRFTOKEN': '{{ csrf_token }}', 'Content-Type': 'application/json' },
+                        data: { 'comment': this.comment, 'postid': postid },
+                    }).then(data => {
+                        data = data.data.data.comment
+                        this.comment = ""
+                        window.location.reload();
+                    })
+                }
+            },
+            like(postid) {
+                axios({
+                    method: "POST",
+                    url: "{% url 'likes' %}",
+                    headers: { 'X-CSRFTOKEN': '{{ csrf_token }}', 'Content-Type': 'application/json' },
+                    data: { 'postid': postid }
+                }).then(data => {
+
+                    this.count_likes = data.data.likes
+
+                    if (data.data.isliked == 0) {
+                        this.liked = 'like'
+                        this.disliked = "like"
+                        this.isliked = 'true'
+                    }
+                    else {
+                        console.log(data.data)
+                        this.liked = 'dislike'
+                        this.isliked = 'false'
+                        this.disliked = 'dislike'
+                    }
+                })
+            },
+            del_post(postid){
+                axios({
+                        method: "POST",
+                        url: "{% url 'del_post' %}",
+                        headers: { 'X-CSRFTOKEN': '{{ csrf_token }}', 'Content-Type': 'application/json' },
+                        data:{"postid":postid},
+                    }).then(data=>{
+                        console.log(data)
+                })
+                
+                window.history.back()
+                
+            },
+        }
+    })
+</script>
+
+
+
+
+{% endblock content %}
